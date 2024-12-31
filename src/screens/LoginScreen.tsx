@@ -31,10 +31,7 @@ const LoginScreen = ({navigation}: any) => {
           />
           <Text style={styles.resetPasswordText}>Reset password</Text>
           <View style={styles.footer}>
-            <Button
-              title="Login"
-              onPress={() => navigation.navigate('HomeScreen')}
-            />
+            <Button title="Login" onPress={() => navigation.navigate('Main')} />
             <ButtonPrimary
               title="Sign Up With Email"
               icon={<Icon.Mail width={20} height={20} color="#5956FC" />}

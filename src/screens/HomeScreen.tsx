@@ -1,12 +1,54 @@
-import {StyleSheet, View, Image, Text, TextInput} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
+import React, {useState} from 'react';
 import Icon from '../assets/Icons';
+import {useNavigation, DrawerActions} from '@react-navigation/native';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([
+    {id: '1', text: 'Hello! How can I assist you?', sender: 'bot'},
+  ]);
+
+  // Function to handle send button press
+  const handleSendMessage = () => {
+    if (message.trim()) {
+      const newUserMessage = {
+        id: String(messages.length + 1),
+        text: message,
+        sender: 'user',
+      };
+      setMessages([...messages, newUserMessage]);
+
+      // Simulate bot's response
+      const newBotMessage = {
+        id: String(messages.length + 2),
+        text: 'I am ready to help you with coding questions!',
+        sender: 'bot',
+      };
+      setMessages(prevMessages => [...prevMessages, newBotMessage]);
+
+      setMessage('');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.menuIconContainer}>
-        <Icon.Menu color="#000" style={styles.menuIcon} />
+        <TouchableOpacity
+          style={styles.menuIconContainer}
+          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+          <Icon.Menu color="#000" style={styles.menuIcon} />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.volkaiLogoContainer}>
@@ -15,7 +57,6 @@ const HomeScreen = () => {
             source={require('../assets/images/volkailogo.png')}
             style={styles.volkaiLogo}
           />
-
           <Image
             source={require('../assets/images/profileimage.png')}
             style={styles.profileImage}
@@ -30,7 +71,7 @@ const HomeScreen = () => {
         <Text style={styles.text}>Hello, Boss!</Text>
         <Text style={styles.text}>Am Ready For Help You</Text>
         <Text style={styles.text1}>
-          Ask me anything what's are on your mind. Am{'\n'}
+          Ask me anything what's on your mind. Am{'\n'}
           <Text style={styles.text2}>here to assist you!</Text>
         </Text>
         <View style={styles.button}>
@@ -41,14 +82,41 @@ const HomeScreen = () => {
           </View>
         </View>
       </View>
+
+      <FlatList
+        data={messages}
+        renderItem={({item}) => (
+          <View
+            style={[
+              styles.messageContainer,
+              item.sender === 'user' ? styles.userMessage : styles.botMessage,
+            ]}>
+            <Text style={styles.messageText}>{item.text}</Text>
+          </View>
+        )}
+        keyExtractor={item => item.id}
+        inverted
+      />
+
       <View style={styles.bottomContainer}>
-        <TextInput style={styles.input} />
-      </View>
-      <View style={styles.bottomImage}>
-        <Image
-          source={require('../assets/images/image2.png')}
-          style={styles.image2}
+        <TextInput
+          value={message}
+          onChangeText={setMessage}
+          style={styles.input}
         />
+      </View>
+
+      <View style={styles.bottomImage}>
+        <TouchableOpacity onPress={handleSendMessage}>
+          <Image
+            source={require('../assets/images/image2.png')}
+            style={styles.image2}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.codeContainer}>
+        <Text style={styles.codeText}>{message}</Text>
       </View>
     </View>
   );
@@ -75,7 +143,7 @@ const styles = StyleSheet.create({
   },
   menuIconContainer: {
     position: 'absolute',
-    top: 25,
+    top: 15,
     left: 20,
     justifyContent: 'center',
     alignItems: 'center',
@@ -107,7 +175,6 @@ const styles = StyleSheet.create({
     marginTop: 0,
     textAlign: 'center',
     lineHeight: 45,
-    backgroundColor: ' #1A1A4B',
   },
   text1: {
     fontWeight: '500',
@@ -196,7 +263,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: '#FFFFFF',
     elevation: 6,
-    marginTop: 20,
+    marginTop: 15,
   },
   bottomImage: {
     marginTop: 10,
@@ -207,6 +274,36 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginLeft: 335,
     marginTop: -75,
+  },
+  codeContainer: {
+    marginTop: 30,
+    width: '100%',
+    paddingHorizontal: 20,
+  },
+  codeText: {
+    fontSize: 16,
+    color: '#333',
+    backgroundColor: '#f4f4f4',
+    padding: 10,
+    borderRadius: 5,
+    fontFamily: 'Courier New',
+  },
+  messageContainer: {
+    maxWidth: '80%',
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  userMessage: {
+    backgroundColor: '#d1f7c4',
+    alignSelf: 'flex-end',
+  },
+  botMessage: {
+    backgroundColor: '#f1f1f1',
+    alignSelf: 'flex-start',
+  },
+  messageText: {
+    fontSize: 16,
   },
 });
 
