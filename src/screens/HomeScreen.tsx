@@ -19,7 +19,6 @@ const HomeScreen = () => {
     {id: '1', text: 'Hello! How can I assist you?', sender: 'bot'},
   ]);
 
-  // Function to handle send button press
   const handleSendMessage = () => {
     if (message.trim()) {
       const newUserMessage = {
@@ -29,7 +28,6 @@ const HomeScreen = () => {
       };
       setMessages([...messages, newUserMessage]);
 
-      // Simulate bot's response
       const newBotMessage = {
         id: String(messages.length + 2),
         text: 'I am ready to help you with coding questions!',
@@ -62,24 +60,23 @@ const HomeScreen = () => {
             style={styles.profileImage}
           />
         </View>
+      </View>
+      <Image
+        source={require('../assets/images/image1.png')}
+        style={styles.image1}
+      />
 
-        <Image
-          source={require('../assets/images/image1.png')}
-          style={styles.image1}
-        />
-
-        <Text style={styles.text}>Hello, Boss!</Text>
-        <Text style={styles.text}>Am Ready For Help You</Text>
-        <Text style={styles.text1}>
-          Ask me anything what's on your mind. Am{'\n'}
-          <Text style={styles.text2}>here to assist you!</Text>
-        </Text>
-        <View style={styles.button}>
-          <View style={styles.buttonTextContainer}>
-            <Text style={styles.text3}>using HTML</Text>
-            <Text style={styles.text4}>using CSS</Text>
-            <Text style={styles.text5}>javaScript</Text>
-          </View>
+      <Text style={styles.text}>Hello, Boss!</Text>
+      <Text style={styles.text}>Am Ready For Help You</Text>
+      <Text style={styles.text1}>
+        Ask me anything what's on your mind. Am{'\n'}
+        <Text style={styles.text2}>here to assist you!</Text>
+      </Text>
+      <View style={styles.button}>
+        <View style={styles.buttonTextContainer}>
+          <Text style={styles.text3}>using HTML</Text>
+          <Text style={styles.text4}>using CSS</Text>
+          <Text style={styles.text5}>javaScript</Text>
         </View>
       </View>
 

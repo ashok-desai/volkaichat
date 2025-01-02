@@ -1,7 +1,6 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-// Mail Icon
 const Mail = ({color = '#757070', ...props}) => {
   return (
     <Svg {...props} viewBox="0 0 24 24" fill="none">
@@ -23,7 +22,6 @@ const Mail = ({color = '#757070', ...props}) => {
   );
 };
 
-// Password Icon
 const PasswordIcon = ({color = '#757070', ...props}) => {
   return (
     <Svg width={21} height={24} viewBox="0 0 21 24" fill="none" {...props}>
@@ -37,7 +35,6 @@ const PasswordIcon = ({color = '#757070', ...props}) => {
   );
 };
 
-// EyeClose Icon
 const EyeClose = ({color = '#757070', ...props}) => {
   return (
     <Svg width={30} height={13} viewBox="0 0 30 13" fill="none" {...props}>
@@ -51,13 +48,12 @@ const EyeClose = ({color = '#757070', ...props}) => {
   );
 };
 
-// User Icon (Feather-style)
 const User = ({color = '#757070', ...props}) => {
   return (
     <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" {...props}>
       <Path
         d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM12 14c-2.66 0-8 1.34-8 4v2h16v-2c0-2.66-5.34-4-8-4z"
-        stroke={color} // Feather-style user icon with thin lines
+        stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -71,7 +67,7 @@ const Menu = ({color = '#757070', ...props}) => {
     <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" {...props}>
       <Path
         d="M3 12h18M3 6h18M3 18h18"
-        stroke={color} // Feather-style menu icon with thin lines
+        stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -79,13 +75,43 @@ const Menu = ({color = '#757070', ...props}) => {
     </Svg>
   );
 };
-// Icon Collection
+
+const Search = ({color = '#757070', ...props}) => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" {...props}>
+      <Path
+        d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-4.35-4.35"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+const RightArrow = ({color = '#757070', ...props}) => {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" {...props}>
+      <Path
+        d="M9 18l6-6-6-6"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
 const Icon = {
   Mail,
   PasswordIcon,
   EyeClose,
   User,
   Menu,
+  Search,
+  RightArrow,
 };
 
 export default Icon;
